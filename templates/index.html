@@ -1,0 +1,45 @@
+{{ define "index" }}
+{{ template "header" . }}
+
+<div class="container" style="margin-top: 80px;">
+
+    <!-- Категории -->
+    <div class="row mb-4">
+        <div class="col">
+            <h5>Категории:</h5>
+            <div class="btn-group" role="group">
+                <a href="/" class="btn btn-outline-primary">Все</a>
+                {{range .Categories}}
+                    <a href="/?sort={{.ID}}" class="btn btn-outline-primary">{{.Name}}</a>
+                {{end}}
+            </div>
+        </div>
+    </div>
+
+    <!-- Посты -->
+    <div class="row">
+        {{range .Posts}}
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                {{if .Image.String}}
+                <div class="card-image">
+                    <img src="/{{.Image.String}}" alt="{{.Title}}" style="height:200px; object-fit:cover; width:100%;">
+                </div>
+                {{end}}
+                <div class="card-content p-3">
+                    <h5 class="card-title"><a href="/post/{{.Id}}" class="text-decoration-none">{{.Title}}</a></h5>
+                    <p>{{.Anons}}</p>
+                </div>
+                <div class="card-action p-3">
+                    <a href="/post/{{.Id}}" class="btn btn-primary">Читать далее</a>
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <p>Статей пока нет.</p>
+        {{end}}
+    </div>
+</div>
+
+{{ template "footer" . }}
+{{ end }}

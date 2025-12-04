@@ -1,0 +1,47 @@
+{{ define "create" }}
+{{ template "header" . }}
+
+<div class="container" style="max-width: 700px; margin-top: 80px;">
+
+    <div class="card shadow-sm p-4">
+        <h2 class="text-center mb-4">Добавление новой статьи</h2>
+        <form action="/save_article" method="POST" enctype="multipart/form-data">
+
+            <div class="form-floating mb-3">
+                <input type="text" name="title" required class="form-control" id="floatingTitle" placeholder="Название статьи">
+                <label for="floatingTitle">Название статьи</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <textarea name="anons" class="form-control" id="floatingAnons" placeholder="Введите анонс" style="height: 80px;"></textarea>
+                <label for="floatingAnons">Введите анонс</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <textarea name="full_text" class="form-control" id="floatingFullText" placeholder="Введите полный текст" style="height: 150px;"></textarea>
+                <label for="floatingFullText">Введите полный текст</label>
+            </div>
+
+            <div class="mb-3 text-start">
+                <label for="image" class="form-label">Загрузить фото статьи</label>
+                <input type="file" name="image" class="form-control" id="image" accept="image/*">
+            </div>
+
+            <div class="mb-3 text-start">
+                <label for="category" class="form-label">Выберите категорию</label>
+                <select name="category_id" id="category" class="form-select">
+                  {{ range .Categories }}
+                    <option value="{{ .ID }}">{{ .Name }}</option>
+                  {{ end }}
+                </select>
+            </div>
+
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Добавить статью</button>
+
+        </form>
+    </div>
+
+</div>
+
+{{ template "footer" . }}
+{{ end }}
